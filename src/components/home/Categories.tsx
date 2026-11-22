@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Keyboard } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/home/Reveal";
 import { SectionHeading } from "@/components/home/SectionHeading";
 import { getAllProducts, getBrands } from "@/lib/products";
@@ -68,10 +68,13 @@ export function Categories() {
             <p className="relative mt-4 max-w-sm text-sm leading-relaxed text-white/50">
               Magnéticos, Hall Effect y low-profile. El Top 3 de {keyboardBrands.length} marcas.
             </p>
-            <div className="relative my-4 flex flex-1 items-center justify-center">
-              <Keyboard
-                strokeWidth={0.5}
-                className="h-56 w-56 text-white/15 transition-transform duration-[1.4s] ease-premium group-hover:scale-105 md:h-72 md:w-72"
+            <div className="relative -mx-8 my-4 min-h-[220px] flex-1 md:-mx-12">
+              <Image
+                src="/images/home/categoria-teclados.webp"
+                alt="Wooting 80HE"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-contain mix-blend-lighten transition-transform duration-[1.4s] ease-premium group-hover:scale-105 [mask-image:radial-gradient(ellipse_at_center,#000_60%,transparent_90%)]"
               />
             </div>
             <p className="relative text-xs leading-relaxed text-white/40">{keyboardBrands.join(" · ")}</p>

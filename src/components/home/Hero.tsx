@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ButtonLink } from "@/components/ui/Button";
-import { frameSrc, heroSequence } from "@/config/sequence";
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -76,8 +75,8 @@ export function Hero() {
       <div data-hero-product className="relative z-0 mx-auto -mt-[12vw] w-full max-w-6xl flex-1 md:-mt-[17vw] xl:-mt-56">
         <div className="relative aspect-[16/10] w-full sequence-mask">
           <Image
-            src={frameSrc(heroSequence, 0)}
-            alt="Mouse premium Yamli Store (render provisional)"
+            src="/images/home/portada-mouse.webp"
+            alt="Logitech G Pro X Superlight 2"
             fill
             priority
             sizes="(min-width: 1280px) 1152px, 100vw"
