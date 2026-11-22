@@ -39,7 +39,7 @@ export function Categories() {
             </p>
             <div className="relative -mx-8 my-4 flex-1 md:-mx-12">
               <Image
-                src="/images/home/categoria-mouse.webp"
+                src="/images/home/categoria-mouse-v2.webp"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -70,7 +70,7 @@ export function Categories() {
             </p>
             <div className="relative -mx-8 my-4 min-h-[220px] flex-1 md:-mx-12">
               <Image
-                src="/images/home/categoria-teclados.webp"
+                src="/images/home/categoria-teclados-v2.webp"
                 alt="Wooting 80HE"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

@@ -75,7 +75,7 @@ export function Hero() {
       <div data-hero-product className="relative z-0 mx-auto -mt-[12vw] w-full max-w-6xl flex-1 md:-mt-[17vw] xl:-mt-56">
         <div className="relative aspect-[16/10] w-full sequence-mask">
           <Image
-            src="/images/home/portada-mouse.webp"
+            src="/images/home/portada-mouse-v2.webp"
             alt="Logitech G Pro X Superlight 2"
             fill
             priority

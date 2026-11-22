@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Reveal } from "@/components/home/Reveal";
 import { SectionHeading } from "@/components/home/SectionHeading";
 import { siteConfig } from "@/config/site";
@@ -27,6 +28,21 @@ export function About() {
             </div>
           ))}
         </dl>
+        <figure data-reveal className="relative overflow-hidden rounded-[32px] border border-white/[0.06] lg:col-span-12">
+          <div className="relative aspect-[16/10] md:aspect-[16/7]">
+            <Image
+              src="/images/home/nosotros-setup.webp"
+              alt="Setup gaming con el Logitech G Pro X Superlight 2 y el Wooting 80HE"
+              fill
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+          </div>
+          <figcaption className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 md:bottom-10 md:left-10">
+            Tu setup, a otro nivel
+          </figcaption>
+        </figure>
       </Reveal>
     </section>
   );

@@ -8,17 +8,17 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OgImage() {
-  const img = await readFile(join(process.cwd(), "public/images/home/portada-mouse.png"));
-  const src = `data:image/png;base64,${img.toString("base64")}`;
+  const img = await readFile(join(process.cwd(), "public/images/home/compartir.jpg"));
+  const src = `data:image/jpeg;base64,${img.toString("base64")}`;
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#020101", position: "relative" }}>
-        <img src={src} width={900} height={562} style={{ position: "absolute", right: -120, top: 40 }} alt="" />
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#03050a", position: "relative" }}>
+        <img src={src} width={1200} height={630} style={{ position: "absolute", left: 0, top: 0 }} alt="" />
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(90deg, #020101 30%, rgba(2,1,1,0.6) 55%, rgba(2,1,1,0) 75%)",
+            background: "linear-gradient(90deg, rgba(2,3,8,0.85) 25%, rgba(2,3,8,0) 60%)",
           }}
         />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 80px", color: "white" }}>
