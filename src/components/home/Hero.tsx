@@ -47,7 +47,7 @@ export function Hero() {
 
       <div data-hero-copy className="relative z-10 mx-auto w-full max-w-7xl px-6 text-center md:px-10">
         <p data-hero-fade className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 md:text-[11px] md:tracking-[0.4em]">
-          Engineered for those who demand more.
+          Mouse y teclados gaming · Selección @yamli_store
         </p>
         <h1 className="mt-6 font-display text-[13vw] font-medium leading-[0.92] tracking-[-0.04em] text-white md:text-[7.6vw] xl:text-[112px]">
           <span className="block overflow-hidden">
@@ -60,14 +60,14 @@ export function Hero() {
           </span>
         </h1>
         <p data-hero-fade className="mx-auto mt-8 max-w-xl text-[15px] leading-relaxed text-white/50 md:text-base">
-          Descubre una nueva generación de mouse diseñados para llevar tu precisión, rendimiento y productividad al siguiente nivel.
+          El Top 3 de las mejores marcas del mundo gamer, elegido modelo por modelo. Encuentra el tuyo y consulta precio al instante.
         </p>
         <div data-hero-fade className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <ButtonLink href="/products">
-            Explore Collection <ArrowRight size={16} className="transition-transform duration-500 group-hover:translate-x-1" />
+            Ver colección <ArrowRight size={16} className="transition-transform duration-500 group-hover:translate-x-1" />
           </ButtonLink>
           <ButtonLink href="#experience" variant="outline">
-            Discover Technology
+            Explorar en 360°
           </ButtonLink>
         </div>
       </div>
@@ -91,7 +91,7 @@ export function Hero() {
         className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 transition hover:text-white"
         aria-label="Desplázate para descubrir"
       >
-        Scroll
+        Descubre
         <span className="relative h-10 w-px overflow-hidden bg-white/10">
           <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2s_ease-in-out_infinite] bg-white/70" />
         </span>

@@ -33,6 +33,21 @@ export function consultUrl(p: Pick<Product, "brand" | "model">): string {
   return siteConfig.consult.tiktokUrl;
 }
 
+/** Enlace de consulta general (sin producto concreto). */
+export function generalConsultUrl(): string {
+  const wa: string = siteConfig.consult.whatsapp;
+  if (wa) {
+    const msg = `Hola, quiero hacer una consulta sobre los productos de ${siteConfig.name}.`;
+    return `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
+  }
+  return siteConfig.consult.tiktokUrl;
+}
+
+/** Nombre del canal de consulta activo, para textos de botones. */
+export function consultChannel(): "WhatsApp" | "TikTok" {
+  return (siteConfig.consult.whatsapp as string) ? "WhatsApp" : "TikTok";
+}
+
 export function cn(...classes: (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(" ");
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { consultChannel, generalConsultUrl } from "@/lib/format";
 import { siteConfig } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 
@@ -21,15 +22,28 @@ export function Footer() {
             <li><Link className="hover:text-white" href="/products?category=mouse">Mouse</Link></li>
             <li><Link className="hover:text-white" href="/products?category=keyboard">Teclados</Link></li>
             <li><Link className="hover:text-white" href="/products">Colección completa</Link></li>
+            <li><Link className="hover:text-white" href="/#como-comprar">Cómo comprar</Link></li>
+            <li><Link className="hover:text-white" href="/#preguntas">Preguntas frecuentes</Link></li>
           </ul>
         </div>
 
         <div className="md:col-span-3">
           <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">Contacto</h3>
           <ul className="mt-5 space-y-3 text-sm text-white/65">
-            <li className="flex items-center gap-3"><Mail size={14} className="text-white/35" />{siteConfig.contact.email}</li>
-            <li className="flex items-center gap-3"><Phone size={14} className="text-white/35" />{siteConfig.contact.phone}</li>
-            <li className="flex items-center gap-3"><MapPin size={14} className="text-white/35" />{siteConfig.contact.address}</li>
+            <li>
+              <a href={generalConsultUrl()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white">
+                <MessageCircle size={14} className="text-white/35" />Consultas por {consultChannel()}
+              </a>
+            </li>
+            {siteConfig.contact.email && (
+              <li className="flex items-center gap-3"><Mail size={14} className="text-white/35" />{siteConfig.contact.email}</li>
+            )}
+            {siteConfig.contact.phone && (
+              <li className="flex items-center gap-3"><Phone size={14} className="text-white/35" />{siteConfig.contact.phone}</li>
+            )}
+            {siteConfig.contact.address && (
+              <li className="flex items-center gap-3"><MapPin size={14} className="text-white/35" />{siteConfig.contact.address}</li>
+            )}
           </ul>
         </div>
 
@@ -38,7 +52,7 @@ export function Footer() {
           <ul className="mt-5 flex flex-wrap gap-2">
             {siteConfig.socials.map((s) => (
               <li key={s.label}>
-                <a href={s.href} className="inline-block rounded-full border border-white/10 px-4 py-2 text-xs text-white/60 transition hover:border-white/30 hover:text-white">
+                <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-block rounded-full border border-white/10 px-4 py-2 text-xs text-white/60 transition hover:border-white/30 hover:text-white">
                   {s.label}
                 </a>
               </li>

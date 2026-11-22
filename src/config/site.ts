@@ -19,19 +19,23 @@ export const siteConfig = {
     tiktokUrl: "https://www.tiktok.com/@yamli_store",
     tiktokHandle: "@yamli_store",
   },
+  /** URL pública del sitio (para SEO, sitemap e imágenes al compartir). */
+  url: "https://nexmouse.vercel.app",
+  /** Datos de contacto opcionales: solo se muestran si están rellenos. */
   contact: {
-    email: "hola@yamlistore.example", // placeholder
-    phone: "+00 000 000 000", // placeholder
-    address: "Dirección pendiente de definir",
+    email: "",
+    phone: "",
+    address: "",
   },
   socials: [
     { label: "TikTok", href: "https://www.tiktok.com/@yamli_store" },
   ],
   nav: [
-    { label: "Home", href: "/" },
+    { label: "Inicio", href: "/" },
     { label: "Mouse", href: "/products?category=mouse" },
     { label: "Teclados", href: "/products?category=keyboard" },
     { label: "Colección", href: "/products" },
+    { label: "Cómo comprar", href: "/#como-comprar" },
     { label: "Nosotros", href: "/#nosotros" },
   ],
   cartStorageKey: "nexmouse-cart-v1",

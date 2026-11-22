@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
+import { BadgeCheck, ChevronLeft, Handshake, MessageCircle } from "lucide-react";
+import { ConsultButton } from "@/components/product/ConsultButton";
+import { siteConfig } from "@/config/site";
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { productName } from "@/types/product";
 import { categoryLabel } from "@/lib/format";
@@ -19,7 +21,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const p = getProductBySlug(slug);
-  return p ? { title: productName(p), description: p.description } : {};
+  if (!p) return {};
+  const title = productName(p);
+  const images = p.images[0] ? [{ url: p.images[0].src, alt: title }] : undefined;
+  return {
+    title,
+    description: p.description,
+    alternates: { canonical: `/products/${p.slug}` },
+    openGraph: { title, description: p.description, url: `/products/${p.slug}`, images },
+    twitter: { card: "summary_large_image", title, description: p.description, images: images?.map((i) => i.url) },
+  };
 }
 
 export default async function ProductPage({ params }: Params) {
@@ -29,12 +40,43 @@ export default async function ProductPage({ params }: Params) {
   const related = getRelatedProducts(product);
   const name = productName(product);
 
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name,
+      brand: { "@type": "Brand", name: product.brand },
+      category: categoryLabel[product.category],
+      description: product.description,
+      image: product.images.map((i) => (i.src.startsWith("http") ? i.src : `${siteConfig.url}${i.src}`)),
+      url: `${siteConfig.url}/products/${product.slug}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Colección", item: `${siteConfig.url}/products` },
+        { "@type": "ListItem", position: 2, name: categoryLabel[product.category], item: `${siteConfig.url}/products?category=${product.category}` },
+        { "@type": "ListItem", position: 3, name },
+      ],
+    },
+  ];
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-28 md:px-10 md:pt-36">
-        <Link href="/products" className="mb-10 inline-flex items-center gap-1 text-sm text-white/45 hover:text-white">
-          <ChevronLeft size={16} /> Colección
-        </Link>
+        <nav aria-label="Ruta de navegación" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-white/40">
+          <Link href="/products" className="inline-flex items-center gap-1 hover:text-white">
+            <ChevronLeft size={16} /> Colección
+          </Link>
+          <span className="text-white/20">/</span>
+          <Link href={`/products?category=${product.category}`} className="hover:text-white">
+            {categoryLabel[product.category]}
+          </Link>
+          <span className="text-white/20">/</span>
+          <span className="text-white/70" aria-current="page">{name}</span>
+        </nav>
 
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
@@ -78,6 +120,12 @@ export default async function ProductPage({ params }: Params) {
             <div className="mt-10">
               <PurchasePanel product={product} />
             </div>
+
+            <ul className="mt-10 grid gap-3 border-t border-white/[0.06] pt-8 text-sm text-white/55">
+              <li className="flex items-center gap-3"><MessageCircle size={16} strokeWidth={1.5} className="text-accent" />Respuesta directa de una persona, no de un bot</li>
+              <li className="flex items-center gap-3"><BadgeCheck size={16} strokeWidth={1.5} className="text-accent" />Precio, color y stock confirmados antes de pagar</li>
+              <li className="flex items-center gap-3"><Handshake size={16} strokeWidth={1.5} className="text-accent" />Pago y entrega coordinados contigo</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -93,14 +141,28 @@ export default async function ProductPage({ params }: Params) {
               Te confirmamos la ficha técnica completa al consultar el producto.
             </p>
           </div>
-          <dl className="divide-y divide-white/[0.06] border-y border-white/[0.06] lg:col-span-8">
-            {product.specs.map((s) => (
-              <div key={s.label} className="grid grid-cols-2 gap-6 py-5 text-sm">
-                <dt className="text-white/45">{s.label}</dt>
-                <dd className={s.value === "Por confirmar" ? "text-white/35" : "text-white"}>{s.value}</dd>
+          {product.specs.some((s) => s.value !== "Por confirmar") ? (
+            <dl className="divide-y divide-white/[0.06] border-y border-white/[0.06] lg:col-span-8">
+              {product.specs.map((s) => (
+                <div key={s.label} className="grid grid-cols-2 gap-6 py-5 text-sm">
+                  <dt className="text-white/45">{s.label}</dt>
+                  <dd className={s.value === "Por confirmar" ? "text-white/35" : "text-white"}>{s.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <div className="rounded-[28px] border border-white/[0.06] bg-white/[0.015] p-8 md:p-10 lg:col-span-8">
+              <p className="text-sm text-white/55">Al consultar te enviamos la ficha técnica oficial con estos datos:</p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {product.specs.map((s) => (
+                  <li key={s.label} className="rounded-full border border-white/10 px-4 py-2 text-xs text-white/70">{s.label}</li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <ConsultButton product={product} variant="outline" />
               </div>
-            ))}
-          </dl>
+            </div>
+          )}
         </div>
       </section>
 

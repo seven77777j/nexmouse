@@ -22,7 +22,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="transition-transform duration-[1.2s] ease-premium group-hover:scale-[1.04]"
         />
-        <div className="absolute left-6 top-6 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/10 bg-ink/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 backdrop-blur-md">
           <span>{categoryLabel[product.category]}</span>
           {product.rank && (
             <>
@@ -31,7 +31,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             </>
           )}
         </div>
-        <span className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-ink/40 text-white/70 opacity-0 backdrop-blur transition-all duration-500 group-hover:opacity-100">
+        <span className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-ink/70 text-white/70 opacity-0 backdrop-blur transition-all duration-500 group-hover:opacity-100">
           <ArrowUpRight size={16} />
         </span>
       </Link>
@@ -51,7 +51,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           href={`/products/${product.slug}`}
           className="inline-flex h-11 items-center rounded-full border border-white/15 px-5 text-sm text-white transition hover:border-white/40"
         >
-          View Product
+          Ver producto
         </Link>
         {purchasable ? (
           <AddToCartButton product={product} className="h-11 px-5" />
