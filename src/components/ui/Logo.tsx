@@ -8,7 +8,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <rect x="0.75" y="0.75" width="16.5" height="22.5" rx="8.25" stroke="currentColor" strokeWidth="1.5" />
         <line x1="9" y1="4" x2="9" y2="9" stroke="#4c8dff" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
-      <span className="font-display text-[15px] font-semibold tracking-[0.28em]">{siteConfig.name}</span>
+      <span className="font-display text-[15px] font-semibold tracking-[0.28em] uppercase">{siteConfig.name}</span>
     </Link>
   );
 }

@@ -77,7 +77,7 @@ export function Hero() {
         <div className="relative aspect-[16/10] w-full sequence-mask">
           <Image
             src={frameSrc(heroSequence, 0)}
-            alt="Mouse premium NEXMOUSE (render provisional)"
+            alt="Mouse premium Jami Store (render provisional)"
             fill
             priority
             sizes="(min-width: 1280px) 1152px, 100vw"

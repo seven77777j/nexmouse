@@ -1,4 +1,4 @@
-# NEXMOUSE — tienda premium de mouse
+# Jami Store — tienda premium de mouse y teclados
 
 Experiencia e-commerce dark premium para mouse **Gaming** y **Professional**.
 Stack: Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · GSAP 3 + ScrollTrigger · Canvas · Lucide.

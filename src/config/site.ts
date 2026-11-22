@@ -3,7 +3,7 @@
  * Cambia aquí el nombre, textos y enlaces; se propagan a toda la web.
  */
 export const siteConfig = {
-  name: "NEXMOUSE",
+  name: "Jami Store",
   tagline: "Precision is everything.",
   description:
     "Mouse y teclados gaming seleccionados por @yamli_store. Lo mejor para tu setup.",
@@ -20,7 +20,7 @@ export const siteConfig = {
     tiktokHandle: "@yamli_store",
   },
   contact: {
-    email: "hola@nexmouse.example", // placeholder
+    email: "hola@jamistore.example", // placeholder
     phone: "+00 000 000 000", // placeholder
     address: "Dirección pendiente de definir",
   },
