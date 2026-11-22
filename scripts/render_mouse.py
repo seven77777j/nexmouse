@@ -1,5 +1,5 @@
 """
-Procedural PLACEHOLDER renderer for Jami Store.
+Procedural PLACEHOLDER renderer for Yamli Store.
 
 Generates an ordered 360° image sequence of one (fictional) mouse model by
 ray-marching a signed-distance-field. These frames are temporary stand-ins:
