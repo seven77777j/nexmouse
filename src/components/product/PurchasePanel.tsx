@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShieldCheck, Truck, RotateCcw } from "lucide-react";
 import type { Product } from "@/types/product";
 import { useCart } from "@/store/cart";
 import { availabilityLabel, canPurchase, formatPrice } from "@/lib/format";
 import { maxPurchasable } from "@/lib/inventory";
+import { siteConfig } from "@/config/site";
 import { QuantitySelector } from "@/components/product/QuantitySelector";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
+import { ConsultButton } from "@/components/product/ConsultButton";
 import { buttonClass } from "@/components/ui/Button";
 
 export function PurchasePanel({ product }: { product: Product }) {
@@ -16,14 +17,34 @@ export function PurchasePanel({ product }: { product: Product }) {
   const { add, close } = useCart();
   const router = useRouter();
   const max = maxPurchasable(product);
-  const available = canPurchase(product.availability);
+
+  if (!canPurchase(product)) {
+    return (
+      <div>
+        <p className="font-display text-3xl font-light text-white">Precio a consultar</p>
+        <p className="mt-2 text-sm text-white/45">
+          Escríbenos y te confirmamos precio, colores y disponibilidad.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <ConsultButton product={product} className="w-full sm:w-auto" />
+          {product.sourceUrl && (
+            <a
+              href={product.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClass("outline", "w-full sm:w-auto")}
+            >
+              Ver en TikTok {siteConfig.consult.tiktokHandle}
+            </a>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <div className="flex items-baseline gap-3">
-        <p className="font-display text-4xl font-light tabular-nums text-white">{formatPrice(product.price)}</p>
-        {product.compareAtPrice && <p className="text-white/35 line-through">{formatPrice(product.compareAtPrice)}</p>}
-      </div>
+      <p className="font-display text-4xl font-light tabular-nums text-white">{formatPrice(product.price!)}</p>
       <p className="mt-2 text-sm text-white/45">
         {availabilityLabel[product.availability]}
         {product.availability === "low_stock" && ` · quedan ${product.stock}`}
@@ -34,7 +55,6 @@ export function PurchasePanel({ product }: { product: Product }) {
         <AddToCartButton product={product} quantity={qty} variant="outline" className="flex-1 sm:flex-none" />
         <button
           type="button"
-          disabled={!available}
           onClick={() => {
             add(product.id, qty);
             close();
@@ -45,12 +65,6 @@ export function PurchasePanel({ product }: { product: Product }) {
           Comprar ahora
         </button>
       </div>
-
-      <ul className="mt-10 grid gap-4 border-t border-white/[0.06] pt-8 text-sm text-white/50 sm:grid-cols-3">
-        <li className="flex items-center gap-2"><Truck size={16} strokeWidth={1.5} /> Envío por definir</li>
-        <li className="flex items-center gap-2"><RotateCcw size={16} strokeWidth={1.5} /> Devoluciones por definir</li>
-        <li className="flex items-center gap-2"><ShieldCheck size={16} strokeWidth={1.5} /> Garantía por definir</li>
-      </ul>
     </div>
   );
 }

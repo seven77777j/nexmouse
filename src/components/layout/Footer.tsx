@@ -11,16 +11,15 @@ export function Footer() {
         <div className="md:col-span-4">
           <Logo className="text-white" />
           <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/45">
-            Mouse premium diseñados para gamers y profesionales que exigen precisión, rendimiento y ergonomía.
+            Lo mejor para tu setup: mouse y teclados gaming seleccionados marca por marca.
           </p>
         </div>
 
         <div className="md:col-span-2">
           <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">Categorías</h3>
           <ul className="mt-5 space-y-3 text-sm text-white/65">
-            <li><Link className="hover:text-white" href="/products?category=gaming">Gaming</Link></li>
-            <li><Link className="hover:text-white" href="/products?category=professional">Professional</Link></li>
-            <li><Link className="hover:text-white" href="/products?connectivity=wireless">Inalámbricos</Link></li>
+            <li><Link className="hover:text-white" href="/products?category=mouse">Mouse</Link></li>
+            <li><Link className="hover:text-white" href="/products?category=keyboard">Teclados</Link></li>
             <li><Link className="hover:text-white" href="/products">Colección completa</Link></li>
           </ul>
         </div>
@@ -50,7 +49,7 @@ export function Footer() {
 
       <div className="border-t border-white/[0.06]">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-xs text-white/35 md:flex-row md:items-center md:justify-between md:px-10">
-          <p>© {year} {siteConfig.name}. Sitio en desarrollo · catálogo de demostración.</p>
+          <p>© {year} {siteConfig.name}. Precios bajo consulta.</p>
           <div className="flex gap-6">
             <Link href="/legal/privacy" className="hover:text-white">Política de privacidad</Link>
             <Link href="/legal/terms" className="hover:text-white">Términos y condiciones</Link>

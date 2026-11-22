@@ -117,7 +117,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     () =>
       lines.flatMap((l) => {
         const product = getProductById(l.productId);
-        return product ? [{ product, quantity: l.quantity, lineTotal: product.price * l.quantity }] : [];
+        return product ? [{ product, quantity: l.quantity, lineTotal: (product.price ?? 0) * l.quantity }] : [];
       }),
     [lines]
   );

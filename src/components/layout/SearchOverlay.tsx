@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Search, X } from "lucide-react";
 import { getAllProducts, searchProducts } from "@/lib/products";
-import { formatPrice, cn } from "@/lib/format";
+import { formatPrice, cn, categoryLabel } from "@/lib/format";
+import { ProductVisual } from "@/components/product/ProductVisual";
+import { productName } from "@/types/product";
 
 export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [q, setQ] = useState("");
@@ -62,15 +63,15 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
             <li key={p.id}>
               <Link href={`/products/${p.slug}`} onClick={onClose} className="group flex items-center gap-5 py-4">
                 <div className="relative h-14 w-14 overflow-hidden rounded-xl bg-graphite">
-                  <Image src={p.images[0].src} alt="" fill sizes="56px" className="object-cover" />
+                  <ProductVisual product={p} sizes="56px" variant="thumb" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-white">{p.name}</p>
+                  <p className="text-white">{productName(p)}</p>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                    {p.category} · {p.connectivity === "wireless" ? "Inalámbrico" : "Con cable"}
+                    {categoryLabel[p.category]}{p.rank ? ` · Top ${p.rank} ${p.brand}` : ""}
                   </p>
                 </div>
-                <span className="text-sm text-white/60">{formatPrice(p.price)}</span>
+                <span className="text-sm text-white/60">{typeof p.price === "number" ? formatPrice(p.price) : "Consultar"}</span>
                 <ArrowRight size={16} className="text-white/30 transition group-hover:translate-x-1 group-hover:text-accent" />
               </Link>
             </li>

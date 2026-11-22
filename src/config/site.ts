@@ -6,24 +6,31 @@ export const siteConfig = {
   name: "NEXMOUSE",
   tagline: "Precision is everything.",
   description:
-    "Mouse premium para gaming y uso profesional. Precisión, rendimiento y ergonomía.",
+    "Mouse y teclados gaming seleccionados por @yamli_store. Lo mejor para tu setup.",
   currency: "USD",
   locale: "es-ES",
+  /**
+   * Dónde se consulta el precio de un producto.
+   * Si defines `whatsapp` (solo dígitos con código de país, p. ej. "51999999999"),
+   * el botón "Consultar precio" abrirá WhatsApp con un mensaje ya escrito.
+   */
+  consult: {
+    whatsapp: "",
+    tiktokUrl: "https://www.tiktok.com/@yamli_store",
+    tiktokHandle: "@yamli_store",
+  },
   contact: {
     email: "hola@nexmouse.example", // placeholder
     phone: "+00 000 000 000", // placeholder
     address: "Dirección pendiente de definir",
   },
   socials: [
-    { label: "Instagram", href: "#" },
-    { label: "X", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "Discord", href: "#" },
+    { label: "TikTok", href: "https://www.tiktok.com/@yamli_store" },
   ],
   nav: [
     { label: "Home", href: "/" },
-    { label: "Gaming", href: "/products?category=gaming" },
-    { label: "Professional", href: "/products?category=professional" },
+    { label: "Mouse", href: "/products?category=mouse" },
+    { label: "Teclados", href: "/products?category=keyboard" },
     { label: "Colección", href: "/products" },
     { label: "Nosotros", href: "/#nosotros" },
   ],

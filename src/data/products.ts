@@ -1,230 +1,107 @@
-import type { Product } from "@/types/product";
-import { heroSequence } from "@/config/sequence";
+import type { Product, ProductCategory } from "@/types/product";
 
 /**
- * CATÁLOGO DE DEMOSTRACIÓN
- * ------------------------------------------------------------------
- * Todos los productos, precios y especificaciones son FICTICIOS y sirven
- * solo para maquetar la tienda (isDemo: true). Sustitúyelos por los datos
- * reales de cada modelo antes de publicar. Esta es la única fuente de verdad
- * del catálogo: en el futuro puede reemplazarse por una API / CMS / ERP
- * manteniendo el tipo `Product`.
+ * CATÁLOGO — fuente: rankings "Top 3 por marca" publicados en TikTok por @yamli_store.
+ * ------------------------------------------------------------------------------
+ * - Nombres y puestos tal como aparecen en las publicaciones.
+ * - Sin precio (`price` vacío) → la web muestra "Consultar precio".
+ *   Cuando tengas precio, añade `price: 199` al producto y se activa "Añadir al carrito".
+ * - Especificaciones técnicas: no aparecen en las publicaciones, por eso figuran
+ *   "Por confirmar". No se han inventado datos.
+ * - Fotos: añade rutas en `images` (p. ej. "/images/products/ajazz-am3-max.webp").
+ *   Mientras esté vacío se muestra una ficha tipográfica.
  */
 
-const gallery = (key: string, name: string) =>
-  [1, 2, 3, 4].map((n) => ({
-    src: `/images/products/${key}-${n}.webp`,
-    alt: `${name} — render de demostración, vista ${n}`,
-  }));
+const SOURCES = {
+  mouse1: "https://www.tiktok.com/@yamli_store/photo/7673347791485226260",
+  mouse2: "https://www.tiktok.com/@yamli_store/photo/7674274232930422033",
+  mouse3: "https://www.tiktok.com/@yamli_store/photo/7679576364344724757",
+  keyboards: "https://www.tiktok.com/@yamli_store/photo/7677334865288760596",
+} as const;
 
-export const products: Product[] = [
-  {
-    id: "nx-phantom-x",
-    slug: "phantom-x",
-    name: "Phantom X",
-    category: "gaming",
-    connectivity: "wireless",
-    price: 149,
-    shortDescription: "Buque insignia inalámbrico para competición.",
-    description:
-      "Modelo de demostración pensado para juego competitivo: carcasa simétrica de perfil bajo, botones con separación central y una línea de luz perimetral que marca su silueta.",
-    highlights: ["Perfil ultraligero", "Inalámbrico de baja latencia", "DPI configurable", "Sensor óptico de alta precisión"],
-    specs: [
-      { label: "Sensor", value: "Óptico (valor demo)" },
-      { label: "DPI", value: "100 – 26.000 (demo)" },
-      { label: "Polling rate", value: "Hasta 4.000 Hz (demo)" },
-      { label: "Peso", value: "58 g (demo)" },
-      { label: "Conectividad", value: "2,4 GHz + Bluetooth (demo)" },
-      { label: "Autonomía", value: "Hasta 90 h (demo)" },
-      { label: "Botones", value: "5 programables (demo)" },
-    ],
-    images: gallery("phantom", "Phantom X"),
-    availability: "in_stock",
-    stock: 24,
-    tags: ["esports", "ligero", "fps"],
-    isDemo: true,
-    featured: true,
-    sequence: {
-      ...heroSequence,
-      chapters: [
-        {
-          from: 0,
-          to: 30,
-          eyebrow: "01 — Diseño",
-          title: "Forma esculpida para desaparecer en tu mano.",
-          body: "Una silueta continua, sin aristas innecesarias. Cada curva existe por una razón.",
-          align: "left",
-        },
-        {
-          from: 31,
-          to: 60,
-          eyebrow: "02 — Ergonomía",
-          title: "Construido ligero. Construido para durar.",
-          body: "Estructura interna optimizada y superficies con agarre para sesiones largas sin fatiga.",
-          stats: [
-            { label: "Peso", value: "58 g" },
-            { label: "Botones", value: "5" },
-          ],
-          align: "right",
-        },
-        {
-          from: 61,
-          to: 90,
-          eyebrow: "03 — Sensor",
-          title: "Precisión al píxel. Latencia mínima.",
-          body: "Seguimiento óptico de alta precisión y frecuencia de sondeo elevada para cada micro-ajuste.",
-          stats: [
-            { label: "DPI máx.", value: "26K" },
-            { label: "Polling", value: "4K Hz" },
-          ],
-          align: "left",
-        },
-        {
-          from: 91,
-          to: 120,
-          eyebrow: "04 — Phantom X",
-          title: "Precision is everything.",
-          body: "El nuevo estándar de NEXMOUSE para quienes exigen más.",
-          align: "right",
-        },
-      ],
-    },
-  },
-  {
-    id: "nx-spectre-pro",
-    slug: "spectre-pro",
-    name: "Spectre Pro",
-    category: "gaming",
-    connectivity: "wireless",
-    price: 129,
-    shortDescription: "Compacto, rápido y equilibrado para todos los agarres.",
-    description:
-      "Modelo de demostración de perfil bajo y acabado satinado, orientado a jugadores que alternan entre agarre claw y fingertip.",
-    highlights: ["Formato compacto", "Inalámbrico", "Acabado satinado", "Switches ópticos"],
-    specs: [
-      { label: "Sensor", value: "Óptico (valor demo)" },
-      { label: "DPI", value: "100 – 20.000 (demo)" },
-      { label: "Polling rate", value: "Hasta 1.000 Hz (demo)" },
-      { label: "Peso", value: "63 g (demo)" },
-      { label: "Conectividad", value: "2,4 GHz (demo)" },
-      { label: "Autonomía", value: "Hasta 70 h (demo)" },
-    ],
-    images: gallery("spectre", "Spectre Pro"),
-    availability: "low_stock",
-    stock: 4,
-    tags: ["compacto", "claw", "fps"],
-    isDemo: true,
-  },
-  {
-    id: "nx-pulse-mini",
-    slug: "pulse-mini",
-    name: "Pulse Mini",
-    category: "gaming",
-    connectivity: "wired",
-    price: 69,
-    shortDescription: "Cable ultraflexible y respuesta inmediata.",
-    description:
-      "Modelo de demostración con cable paracord y carcasa mínima, pensado para quien prefiere conexión directa sin baterías.",
-    highlights: ["Cable paracord", "Sin batería", "Muy ligero", "Plug & play"],
-    specs: [
-      { label: "Sensor", value: "Óptico (valor demo)" },
-      { label: "DPI", value: "200 – 16.000 (demo)" },
-      { label: "Polling rate", value: "1.000 Hz (demo)" },
-      { label: "Peso", value: "55 g (demo)" },
-      { label: "Conectividad", value: "USB-C con cable (demo)" },
-    ],
-    images: gallery("pulse", "Pulse Mini"),
-    availability: "in_stock",
-    stock: 40,
-    tags: ["cable", "ligero", "budget"],
-    isDemo: true,
-  },
-  {
-    id: "nx-atelier-ergo",
-    slug: "atelier-ergo",
-    name: "Atelier Ergo",
-    category: "professional",
-    connectivity: "wireless",
-    price: 119,
-    shortDescription: "Ergonomía esculpida para jornadas completas.",
-    description:
-      "Modelo de demostración con apoyo de palma elevado y rueda de desplazamiento silenciosa, pensado para diseño, edición y desarrollo.",
-    highlights: ["Apoyo de palma elevado", "Multi-dispositivo", "Clics silenciosos", "Carga USB-C"],
-    specs: [
-      { label: "Sensor", value: "Óptico para múltiples superficies (demo)" },
-      { label: "DPI", value: "200 – 8.000 (demo)" },
-      { label: "Dispositivos", value: "Hasta 3 emparejados (demo)" },
-      { label: "Peso", value: "128 g (demo)" },
-      { label: "Conectividad", value: "Bluetooth + receptor (demo)" },
-      { label: "Autonomía", value: "Hasta 70 días (demo)" },
-    ],
-    images: gallery("atelier", "Atelier Ergo"),
-    availability: "in_stock",
-    stock: 18,
-    tags: ["ergonómico", "diseño", "productividad", "silencioso"],
-    isDemo: true,
-    featured: true,
-    sequence: {
-      basePath: "/images/sequences/atelier",
-      frameCount: 72,
-      prefix: "frame_",
-      pad: 3,
-      extension: "webp",
-      aspect: 1200 / 750,
-      isPlaceholder: true,
-      chapters: [
-        { from: 0, to: 23, eyebrow: "Forma", title: "Diseñado alrededor de tu palma.", body: "Un perfil alto que reparte la presión de forma natural.", align: "left" },
-        { from: 24, to: 47, eyebrow: "Flujo", title: "Tres dispositivos. Un gesto.", body: "Cambia entre equipos sin desconectar nada.", stats: [{ label: "Dispositivos", value: "3" }], align: "right" },
-        { from: 48, to: 71, eyebrow: "Autonomía", title: "Semanas de trabajo con una carga.", body: "Carga rápida por USB-C cuando lo necesites.", stats: [{ label: "Autonomía", value: "70 d" }], align: "left" },
-      ],
-    },
-  },
-  {
-    id: "nx-nimbus-flow",
-    slug: "nimbus-flow",
-    name: "Nimbus Flow",
-    category: "professional",
-    connectivity: "wireless",
-    price: 89,
-    shortDescription: "Silencioso, portátil y preciso en cualquier superficie.",
-    description:
-      "Modelo de demostración de tamaño medio para trabajar desde cualquier lugar, con acabado mineral cálido.",
-    highlights: ["Portátil", "Clics silenciosos", "Bluetooth", "Acabado mineral"],
-    specs: [
-      { label: "Sensor", value: "Óptico (valor demo)" },
-      { label: "DPI", value: "400 – 4.000 (demo)" },
-      { label: "Dispositivos", value: "Hasta 2 emparejados (demo)" },
-      { label: "Peso", value: "96 g (demo)" },
-      { label: "Conectividad", value: "Bluetooth (demo)" },
-      { label: "Autonomía", value: "Hasta 4 meses (demo)" },
-    ],
-    images: gallery("nimbus", "Nimbus Flow"),
-    availability: "preorder",
-    stock: 0,
-    tags: ["portátil", "silencioso", "oficina"],
-    isDemo: true,
-  },
-  {
-    id: "nx-vector-studio",
-    slug: "vector-studio",
-    name: "Vector Studio",
-    category: "professional",
-    connectivity: "wired",
-    price: 59,
-    shortDescription: "Precisión con cable para estaciones de trabajo.",
-    description:
-      "Modelo de demostración con cable y acabado claro, pensado para puestos fijos de diseño y programación.",
-    highlights: ["Conexión con cable", "Rueda de precisión", "Acabado claro", "Sin baterías"],
-    specs: [
-      { label: "Sensor", value: "Óptico (valor demo)" },
-      { label: "DPI", value: "400 – 6.400 (demo)" },
-      { label: "Peso", value: "88 g (demo)" },
-      { label: "Conectividad", value: "USB-C con cable (demo)" },
-    ],
-    images: gallery("vector", "Vector Studio"),
-    availability: "out_of_stock",
-    stock: 0,
-    tags: ["cable", "oficina", "programación"],
-    isDemo: true,
-  },
+type Ranking = { brand: string; source: keyof typeof SOURCES; category: ProductCategory; models: string[] };
+
+/** Cada lista va en orden de ranking: [puesto 1, puesto 2, puesto 3]. */
+const rankings: Ranking[] = [
+  // ——— Mouse · Top 3 por marca (parte 1)
+  { brand: "WLMOUSE", source: "mouse1", category: "mouse", models: ["YING Forged", "× The Swords", "Strider"] },
+  { brand: "Lamzu", source: "mouse1", category: "mouse", models: ["× Reject Paro", "Tachi", "Maya Doodle"] },
+  { brand: "ATK", source: "mouse1", category: "mouse", models: ["Zero Extreme", "Ghost Extreme", "A9 Air+"] },
+  { brand: "MCHOSE", source: "mouse1", category: "mouse", models: ["A7X Ultra", "K7 V2 Ultra+", "L7 Ultra+"] },
+  { brand: "Attack Shark", source: "mouse1", category: "mouse", models: ["R11 Ultra", "R5 Ultra", "V8 Ultra"] },
+  { brand: "Delux", source: "mouse1", category: "mouse", models: ["M900 Ultra", "M800 Mini Ultra", "M700 Ultra"] },
+  { brand: "Aula", source: "mouse1", category: "mouse", models: ["X9", "V9", "SC900"] },
+  { brand: "Scyrox", source: "mouse1", category: "mouse", models: ["V8", "V6"] },
+  { brand: "Irok", source: "mouse1", category: "mouse", models: ["HE 6 Ultra"] },
+  { brand: "Rapoo", source: "mouse1", category: "mouse", models: ["VT0 Air Max", "VT7 Max Gen-2", "VT2 Max Gen"] },
+  { brand: "Monsgeek", source: "mouse1", category: "mouse", models: ["Echo", "Nest", "Dash"] },
+  // ——— Mouse · Top 3 por marca (parte 2)
+  { brand: "Finalmouse", source: "mouse2", category: "mouse", models: ["Starlight X (SLX)", "UltralightX (ULX) Competition Series", "UltralightX Pro Series"] },
+  { brand: "Logitech", source: "mouse2", category: "mouse", models: ["X2 Superstrike", "G Pro X Superlight 2", "G Pro Superlight"] },
+  { brand: "Razer", source: "mouse2", category: "mouse", models: ["Viper V4 Pro", "Viper V3 Pro", "Viper Mini Signature Edition"] },
+  { brand: "VGN", source: "mouse2", category: "mouse", models: ["Dragonfly F1 V5 Turbo+", "Dragonfly Y2 V2 MasterGT", "Dragonfly 3 Ultra"] },
+  { brand: "Incott", source: "mouse2", category: "mouse", models: ["G23 V2 Pro", "G24 Pro", "039 V2"] },
+  { brand: "Royal Kludge", source: "mouse2", category: "mouse", models: ["M3", "MG6", "MG5"] },
+  { brand: "Pwnage", source: "mouse2", category: "mouse", models: ["Vanta", "Trinity", "Stormbreaker"] },
+  { brand: "Rawm", source: "mouse2", category: "mouse", models: ["Leviathan V4"] },
+  // ——— Mouse · Top 3 por marca (parte 3)
+  { brand: "Ajazz", source: "mouse3", category: "mouse", models: ["AM3 Max", "AJ179 Apex", "AJ159 Apex"] },
+  { brand: "Ninjutso", source: "mouse3", category: "mouse", models: ["Sora V3", "Sora Ten Max", "X Vaxxe 4K"] },
+  { brand: "Glorious", source: "mouse3", category: "mouse", models: ["Model O3", "Model O2 Pro", "Model D2 Pro"] },
+  { brand: "Smailwolf", source: "mouse3", category: "mouse", models: ["RS6", "M9", "M8"] },
+  { brand: "IPI", source: "mouse3", category: "mouse", models: ["Hazex Fog", "Fly", "QI Pro"] },
+  { brand: "Eweadn", source: "mouse3", category: "mouse", models: ["Z7", "S9 V2 Ultimate", "S9+ Ultimate"] },
+  { brand: "Kysona", source: "mouse3", category: "mouse", models: ["Jupiter Ultra", "Jupiter X Ultra", "Uranus Ultra"] },
+  { brand: "Gravastar", source: "mouse3", category: "mouse", models: ["Mercury X Air", "Mercury X Pro"] },
+  { brand: "Dareu", source: "mouse3", category: "mouse", models: ["A950 Air Wing", "AE6", "A980 Pro Max"] },
+  // ——— Teclados · Top 3 por marca
+  { brand: "Irok", source: "keyboards", category: "keyboard", models: ["RA68 M-DCE", "ND68 Pro", "FE87 V2"] },
+  { brand: "Wooting", source: "keyboards", category: "keyboard", models: ["80HE", "60HE V2", "Two"] },
+  { brand: "Aula", source: "keyboards", category: "keyboard", models: ["Win68 HE Ultra", "AG60 Pro", "Hero 68 HE"] },
+  { brand: "MCHOSE", source: "keyboards", category: "keyboard", models: ["Ace 68 Turbo", "Mix 87", "Jet 75"] },
+  { brand: "SteelSeries", source: "keyboards", category: "keyboard", models: ["Apex Pro Wireless (Gen 3)", "Apex Pro Mini (Gen 3)", "Apex Pro (Gen 3)"] },
+  { brand: "ATK", source: "keyboards", category: "keyboard", models: ["RS7 V2 Ultra", "68 V3", "RS6 Air"] },
+  { brand: "Razer", source: "keyboards", category: "keyboard", models: ["Huntsman V3 Pro Low-Profile", "BlackWidow V4 Pro 75%", "Huntsman V3 Pro Mini"] },
+  { brand: "Akko", source: "keyboards", category: "keyboard", models: ["5075 V5 TMR", "MOD 007 V5 HE", "5087 V3 HE"] },
+  { brand: "Epomaker", source: "keyboards", category: "keyboard", models: ["HE75 V2 TMR", "HE65 V2 TMR"] },
 ];
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const categoryLabel: Record<ProductCategory, string> = { mouse: "mouse", keyboard: "teclados" };
+
+const PENDING = "Por confirmar";
+const pendingSpecs = (c: ProductCategory) =>
+  c === "mouse"
+    ? ["Sensor", "DPI", "Polling rate", "Peso", "Conectividad", "Autonomía"].map((label) => ({ label, value: PENDING }))
+    : ["Formato", "Switches", "Conectividad", "Polling rate", "Retroiluminación"].map((label) => ({ label, value: PENDING }));
+
+export const products: Product[] = rankings.flatMap((r) =>
+  r.models.map((model, i) => {
+    const rank = (i + 1) as 1 | 2 | 3;
+    const name = `${r.brand} ${model}`;
+    return {
+      id: slugify(`${r.category}-${name}`),
+      slug: slugify(name) + (r.category === "keyboard" ? "-teclado" : ""),
+      brand: r.brand,
+      model,
+      category: r.category,
+      description: `Puesto #${rank} en el Top 3 de ${categoryLabel[r.category]} ${r.brand} de @yamli_store. Consúltanos precio, colores y disponibilidad.`,
+      highlights: [`Top ${rank} ${r.brand}`, r.category === "mouse" ? "Mouse gaming" : "Teclado gaming"],
+      specs: pendingSpecs(r.category),
+      images: [],
+      availability: "consult" as const,
+      stock: 0,
+      tags: [r.brand, r.category === "mouse" ? "mouse" : "teclado", "gaming", "setup"],
+      rank,
+      sourceUrl: SOURCES[r.source],
+      featured: rank === 1,
+    } satisfies Product;
+  })
+);

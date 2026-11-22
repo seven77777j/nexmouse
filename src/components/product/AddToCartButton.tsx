@@ -22,7 +22,7 @@ export function AddToCartButton({
 }) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
-  const available = canPurchase(product.availability);
+  const available = canPurchase(product);
 
   return (
     <button

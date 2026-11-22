@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import { ProductVisual } from "@/components/product/ProductVisual";
+import { productName } from "@/types/product";
 import { useState, useTransition } from "react";
 import { Lock, Info } from "lucide-react";
 import { useCart } from "@/store/cart";
@@ -109,10 +110,10 @@ export default function CheckoutPage() {
             {items.map(({ product, quantity, lineTotal }) => (
               <li key={product.id} className="flex items-center gap-4 py-4">
                 <div className="relative h-14 w-14 overflow-hidden rounded-xl bg-graphite">
-                  <Image src={product.images[0].src} alt="" fill sizes="56px" className="object-cover" />
+                  <ProductVisual product={product} sizes="56px" variant="thumb" />
                 </div>
                 <div className="flex-1 text-sm">
-                  <p className="text-white">{product.name}</p>
+                  <p className="text-white">{productName(product)}</p>
                   <p className="text-white/40">× {quantity}</p>
                 </div>
                 <p className="text-sm tabular-nums text-white">{formatPrice(lineTotal)}</p>

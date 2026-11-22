@@ -3,31 +3,21 @@
 import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { filterProducts, getAllProducts, priceRanges, type PriceFilter, type SortOption } from "@/lib/products";
+import { filterProducts, getAllProducts, getBrands, type SortOption } from "@/lib/products";
 import { ProductCard } from "@/components/product/ProductCard";
 import { cn } from "@/lib/format";
-import type { Connectivity, ProductCategory } from "@/types/product";
+import type { ProductCategory } from "@/types/product";
 
 type Opt<T extends string> = { value: T; label: string };
 
 const categoryOpts: Opt<ProductCategory | "all">[] = [
-  { value: "all", label: "Todos" },
-  { value: "gaming", label: "Gaming" },
-  { value: "professional", label: "Professional" },
-];
-const connOpts: Opt<Connectivity | "all">[] = [
-  { value: "all", label: "Todos" },
-  { value: "wireless", label: "Wireless" },
-  { value: "wired", label: "Wired" },
-];
-const priceOpts: Opt<PriceFilter>[] = [
-  { value: "all", label: "Cualquiera" },
-  ...(Object.entries(priceRanges) as [Exclude<PriceFilter, "all">, { label: string }][]).map(([value, r]) => ({ value, label: r.label })),
+  { value: "all", label: "Todo" },
+  { value: "mouse", label: "Mouse" },
+  { value: "keyboard", label: "Teclados" },
 ];
 const sortOpts: Opt<SortOption>[] = [
-  { value: "featured", label: "Destacados" },
-  { value: "price-asc", label: "Precio: menor a mayor" },
-  { value: "price-desc", label: "Precio: mayor a menor" },
+  { value: "ranking", label: "Ranking (Top 1 primero)" },
+  { value: "brand", label: "Marca" },
   { value: "name", label: "Nombre" },
 ];
 
@@ -65,24 +55,25 @@ export function Catalog() {
   const pathname = usePathname();
 
   const category = pick(params.get("category"), categoryOpts, "all");
-  const connectivity = pick(params.get("connectivity"), connOpts, "all");
-  const price = pick(params.get("price"), priceOpts, "all");
-  const sort = pick(params.get("sort"), sortOpts, "featured");
+  const brands = getBrands(category);
+  const brandParam = params.get("brand");
+  const brand = brandParam && brands.includes(brandParam) ? brandParam : "all";
+  const sort = pick(params.get("sort"), sortOpts, "ranking");
   const query = params.get("q") ?? "";
 
   const update = (key: string, value: string) => {
     const next = new URLSearchParams(params.toString());
-    if (!value || value === "all" || (key === "sort" && value === "featured")) next.delete(key);
+    if (!value || value === "all" || (key === "sort" && value === "ranking")) next.delete(key);
     else next.set(key, value);
     const qs = next.toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
 
   const results = useMemo(
-    () => filterProducts(getAllProducts(), { category, connectivity, price, sort, query }),
-    [category, connectivity, price, sort, query]
+    () => filterProducts(getAllProducts(), { category, brand, sort, query }),
+    [category, brand, sort, query]
   );
-  const active = category !== "all" || connectivity !== "all" || price !== "all" || !!query;
+  const active = category !== "all" || brand !== "all" || !!query;
 
   return (
     <div className="grid gap-14 lg:grid-cols-[260px_1fr]">
@@ -103,8 +94,21 @@ export function Catalog() {
           />
         </label>
         <Chips label="Categoría" opts={categoryOpts} value={category} onChange={(v) => update("category", v)} />
-        <Chips label="Conexión" opts={connOpts} value={connectivity} onChange={(v) => update("connectivity", v)} />
-        <Chips label="Precio" opts={priceOpts} value={price} onChange={(v) => update("price", v)} />
+        <fieldset>
+          <legend className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">Marca</legend>
+          <select
+            value={brand}
+            onChange={(e) => update("brand", e.target.value)}
+            className="h-11 w-full rounded-full border border-white/12 bg-ink px-4 text-sm text-white focus:border-white/35 focus:outline-none"
+          >
+            <option value="all">Todas las marcas ({brands.length})</option>
+            {brands.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </fieldset>
         <fieldset>
           <legend className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/35">Ordenar</legend>
           <select

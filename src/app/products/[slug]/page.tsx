@@ -3,11 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products";
+import { productName } from "@/types/product";
+import { categoryLabel } from "@/lib/format";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductVisual } from "@/components/product/ProductVisual";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ScrollSequence } from "@/components/sequence/ScrollSequence";
-import { DemoBadge } from "@/components/ui/DemoBadge";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -18,7 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const p = getProductBySlug(slug);
-  return p ? { title: p.name, description: p.shortDescription } : {};
+  return p ? { title: productName(p), description: p.description } : {};
 }
 
 export default async function ProductPage({ params }: Params) {
@@ -26,6 +28,7 @@ export default async function ProductPage({ params }: Params) {
   const product = getProductBySlug(slug);
   if (!product) notFound();
   const related = getRelatedProducts(product);
+  const name = productName(product);
 
   return (
     <>
@@ -36,19 +39,32 @@ export default async function ProductPage({ params }: Params) {
 
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <ProductGallery images={product.images} />
+            {product.images.length > 0 ? (
+              <ProductGallery images={product.images} />
+            ) : (
+              <div className="relative aspect-square overflow-hidden rounded-[32px] border border-white/[0.05]">
+                <ProductVisual product={product} sizes="(min-width: 1024px) 55vw, 100vw" variant="hero" priority />
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-5 lg:pt-4">
             <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/45">
               <Link href={`/products?category=${product.category}`} className="text-accent hover:underline">
-                {product.category}
+                {categoryLabel[product.category]}
               </Link>
               <span>·</span>
-              <span>{product.connectivity === "wireless" ? "Wireless" : "Wired"}</span>
-              {product.isDemo && <DemoBadge>Producto demo</DemoBadge>}
+              <Link href={`/products?brand=${encodeURIComponent(product.brand)}`} className="hover:text-white">
+                {product.brand}
+              </Link>
+              {product.rank && (
+                <>
+                  <span>·</span>
+                  <span>Top {product.rank}</span>
+                </>
+              )}
             </div>
-            <h1 className="mt-5 font-display text-5xl font-medium tracking-[-0.03em] text-white md:text-6xl">{product.name}</h1>
+            <h1 className="mt-5 font-display text-5xl font-medium tracking-[-0.03em] text-white md:text-6xl">{name}</h1>
             <p className="mt-5 text-base leading-relaxed text-white/55">{product.description}</p>
 
             <ul className="mt-8 flex flex-wrap gap-2">
@@ -66,26 +82,22 @@ export default async function ProductPage({ params }: Params) {
         </div>
       </div>
 
-      {product.sequence && (
-        <ScrollSequence config={product.sequence} scrollLength={2.4} label={`${product.name} en 360°`} />
-      )}
+      {product.sequence && <ScrollSequence config={product.sequence} scrollLength={2.4} label={`${name} en 360°`} />}
 
       <section className="mx-auto max-w-7xl px-6 py-24 md:px-10">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent">Especificaciones</p>
             <h2 className="mt-5 font-display text-4xl font-medium tracking-tight text-white">Características técnicas</h2>
-            {product.isDemo && (
-              <p className="mt-5 text-sm leading-relaxed text-white/40">
-                Valores de demostración. Sustitúyelos por las especificaciones oficiales del fabricante antes de publicar.
-              </p>
-            )}
+            <p className="mt-5 text-sm leading-relaxed text-white/40">
+              Te confirmamos la ficha técnica completa al consultar el producto.
+            </p>
           </div>
           <dl className="divide-y divide-white/[0.06] border-y border-white/[0.06] lg:col-span-8">
             {product.specs.map((s) => (
               <div key={s.label} className="grid grid-cols-2 gap-6 py-5 text-sm">
                 <dt className="text-white/45">{s.label}</dt>
-                <dd className="text-white">{s.value}</dd>
+                <dd className={s.value === "Por confirmar" ? "text-white/35" : "text-white"}>{s.value}</dd>
               </div>
             ))}
           </dl>

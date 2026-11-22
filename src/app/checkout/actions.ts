@@ -19,7 +19,8 @@ export async function startCheckout(
     const p = getProductById(l.productId);
     if (!p) return { status: "invalid", reason: "Un producto del carrito ya no existe." };
     const qty = Math.floor(l.quantity);
-    if (qty < 1 || qty > maxPurchasable(p)) return { status: "invalid", reason: `Cantidad no disponible para ${p.name}.` };
+    if (qty < 1 || qty > maxPurchasable(p)) return { status: "invalid", reason: `Cantidad no disponible para ${p.brand} ${p.model}.` };
+    if (typeof p.price !== "number") return { status: "invalid", reason: `${p.brand} ${p.model} no tiene precio publicado.` };
     items.push({ productId: p.id, quantity: qty, unitPrice: p.price });
   }
   if (!items.length) return { status: "invalid", reason: "El carrito está vacío." };

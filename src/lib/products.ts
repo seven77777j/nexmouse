@@ -1,5 +1,6 @@
 import { products } from "@/data/products";
-import type { Connectivity, Product, ProductCategory } from "@/types/product";
+import type { Product, ProductCategory } from "@/types/product";
+import { productName } from "@/types/product";
 
 /**
  * Capa de acceso a productos. Hoy lee del archivo local; mañana puede
@@ -17,32 +18,26 @@ export function getProductById(id: string): Product | undefined {
   return products.find((p) => p.id === id);
 }
 
-export function getFeaturedProduct(): Product {
-  return products.find((p) => p.featured && p.sequence) ?? products[0];
+export function getBrands(category?: ProductCategory | "all"): string[] {
+  const list = category && category !== "all" ? products.filter((p) => p.category === category) : products;
+  return [...new Set(list.map((p) => p.brand))].sort((a, b) => a.localeCompare(b));
 }
 
 export function getRelatedProducts(product: Product, limit = 3): Product[] {
-  const same = products.filter((p) => p.id !== product.id && p.category === product.category);
-  const others = products.filter((p) => p.id !== product.id && p.category !== product.category);
-  return [...same, ...others].slice(0, limit);
+  const others = products.filter((p) => p.id !== product.id);
+  const sameBrand = others.filter((p) => p.brand === product.brand && p.category === product.category);
+  const sameCat = others.filter((p) => p.category === product.category && p.brand !== product.brand && p.rank === 1);
+  return [...sameBrand, ...sameCat].slice(0, limit);
 }
 
-export type PriceFilter = "all" | "under-75" | "75-125" | "over-125";
-export type SortOption = "featured" | "price-asc" | "price-desc" | "name";
+export type SortOption = "ranking" | "brand" | "name";
 
 export interface ProductFilters {
   category?: ProductCategory | "all";
-  connectivity?: Connectivity | "all";
-  price?: PriceFilter;
+  brand?: string;
   query?: string;
   sort?: SortOption;
 }
-
-export const priceRanges: Record<Exclude<PriceFilter, "all">, { label: string; min: number; max: number }> = {
-  "under-75": { label: "Menos de $75", min: 0, max: 74.99 },
-  "75-125": { label: "$75 – $125", min: 75, max: 125 },
-  "over-125": { label: "Más de $125", min: 125.01, max: Infinity },
-};
 
 const normalize = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -52,9 +47,7 @@ export function searchProducts(list: Product[], query: string): Product[] {
   if (!q) return list;
   const terms = q.split(/\s+/);
   return list.filter((p) => {
-    const hay = normalize(
-      [p.name, p.category, p.connectivity, p.shortDescription, p.description, ...p.tags, ...p.highlights].join(" ")
-    );
+    const hay = normalize([productName(p), p.category === "keyboard" ? "teclado" : "mouse", p.description, ...p.tags].join(" "));
     return terms.every((t) => hay.includes(t));
   });
 }
@@ -62,24 +55,15 @@ export function searchProducts(list: Product[], query: string): Product[] {
 export function filterProducts(list: Product[], f: ProductFilters): Product[] {
   let out = list;
   if (f.category && f.category !== "all") out = out.filter((p) => p.category === f.category);
-  if (f.connectivity && f.connectivity !== "all") out = out.filter((p) => p.connectivity === f.connectivity);
-  if (f.price && f.price !== "all") {
-    const r = priceRanges[f.price];
-    out = out.filter((p) => p.price >= r.min && p.price <= r.max);
-  }
+  if (f.brand && f.brand !== "all") out = out.filter((p) => p.brand === f.brand);
   if (f.query) out = searchProducts(out, f.query);
   switch (f.sort) {
-    case "price-asc":
-      out = [...out].sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      out = [...out].sort((a, b) => b.price - a.price);
-      break;
     case "name":
-      out = [...out].sort((a, b) => a.name.localeCompare(b.name));
-      break;
+      return [...out].sort((a, b) => productName(a).localeCompare(productName(b)));
+    case "brand":
+      return [...out].sort((a, b) => a.brand.localeCompare(b.brand) || (a.rank ?? 9) - (b.rank ?? 9));
     default:
-      out = [...out].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+      // Ranking: primero todos los #1, luego los #2… manteniendo el orden de publicación.
+      return [...out].sort((a, b) => (a.rank ?? 9) - (b.rank ?? 9));
   }
-  return out;
 }

@@ -1,6 +1,5 @@
-export type ProductCategory = "gaming" | "professional";
-export type Connectivity = "wireless" | "wired";
-export type Availability = "in_stock" | "low_stock" | "preorder" | "out_of_stock";
+export type ProductCategory = "mouse" | "keyboard";
+export type Availability = "consult" | "in_stock" | "low_stock" | "preorder" | "out_of_stock";
 
 export interface SpecItem {
   label: string;
@@ -25,9 +24,7 @@ export interface ImageSequenceConfig {
   basePath: string;
   /** Número total de frames (frame_000 … frame_{n-1}). */
   frameCount: number;
-  /** Prefijo del archivo. */
   prefix?: string;
-  /** Dígitos del número de frame (000 = 3). */
   pad?: number;
   extension?: "webp" | "jpg" | "png" | "avif";
   /** Relación de aspecto nativa de los frames (ancho / alto). */
@@ -40,22 +37,29 @@ export interface ImageSequenceConfig {
 export interface Product {
   id: string;
   slug: string;
-  name: string;
+  /** Nombre del modelo sin la marca. */
+  model: string;
+  brand: string;
   category: ProductCategory;
-  connectivity: Connectivity;
-  price: number;
-  compareAtPrice?: number;
-  shortDescription: string;
+  /** Precio en la moneda de la tienda. Sin precio → se muestra "Consultar precio". */
+  price?: number;
   description: string;
   highlights: string[];
   specs: SpecItem[];
+  /** Fotos del producto. Vacío → se muestra una ficha tipográfica. */
   images: { src: string; alt: string }[];
   availability: Availability;
   /** Stock disponible (preparado para integrar inventario). */
   stock: number;
   tags: string[];
-  /** Los datos son de demostración y no corresponden a un producto real. */
-  isDemo: boolean;
+  /** Puesto en el ranking "Top 3 por marca" de @yamli_store. */
+  rank?: 1 | 2 | 3;
+  /** Publicación de TikTok de donde sale el producto. */
+  sourceUrl?: string;
   featured?: boolean;
   sequence?: ImageSequenceConfig;
+}
+
+export function productName(p: Pick<Product, "brand" | "model">) {
+  return `${p.brand} ${p.model}`;
 }
