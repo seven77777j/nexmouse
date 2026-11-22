@@ -1,4 +1,5 @@
 import type { Product, ProductCategory } from "@/types/product";
+import { PRODUCT_IMAGES } from "./product-images";
 
 /**
  * CATÁLOGO — fuente: rankings "Top 3 por marca" publicados en TikTok por @yamli_store.
@@ -95,7 +96,9 @@ export const products: Product[] = rankings.flatMap((r) =>
       description: `Puesto #${rank} en el Top 3 de ${categoryLabel[r.category]} ${r.brand} de @yamli_store. Consúltanos precio, colores y disponibilidad.`,
       highlights: [`Top ${rank} ${r.brand}`, r.category === "mouse" ? "Mouse gaming" : "Teclado gaming"],
       specs: pendingSpecs(r.category),
-      images: [],
+      images: PRODUCT_IMAGES[slugify(`${r.category}-${name}`)]
+        ? [{ src: PRODUCT_IMAGES[slugify(`${r.category}-${name}`)], alt: name }]
+        : [],
       availability: "consult" as const,
       stock: 0,
       tags: [r.brand, r.category === "mouse" ? "mouse" : "teclado", "gaming", "setup"],

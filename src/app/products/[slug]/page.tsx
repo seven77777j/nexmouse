@@ -5,7 +5,6 @@ import { ChevronLeft } from "lucide-react";
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { productName } from "@/types/product";
 import { categoryLabel } from "@/lib/format";
-import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductVisual } from "@/components/product/ProductVisual";
 import { PurchasePanel } from "@/components/product/PurchasePanel";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -39,12 +38,13 @@ export default async function ProductPage({ params }: Params) {
 
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            {product.images.length > 0 ? (
-              <ProductGallery images={product.images} />
-            ) : (
-              <div className="relative aspect-square overflow-hidden rounded-[32px] border border-white/[0.05]">
-                <ProductVisual product={product} sizes="(min-width: 1024px) 55vw, 100vw" variant="hero" priority />
-              </div>
+            <div className="relative aspect-square overflow-hidden rounded-[32px] border border-white/[0.05]">
+              <ProductVisual product={product} sizes="(min-width: 1024px) 55vw, 100vw" variant="hero" priority />
+            </div>
+            {product.images.length > 0 && (
+              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+                Imagen referencial del modelo · colores y versión pueden variar
+              </p>
             )}
           </div>
 

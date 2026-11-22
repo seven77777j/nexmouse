@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 import { Keyboard, Mouse } from "lucide-react";
 import type { Product } from "@/types/product";
 import { cn } from "@/lib/format";
@@ -21,8 +23,28 @@ export function ProductVisual({
   className?: string;
 }) {
   const img = product.images[0];
-  if (img) {
-    return <Image src={img.src} alt={img.alt} fill sizes={sizes} priority={priority} className={cn("object-cover", className)} />;
+  const [failed, setFailed] = useState(false);
+  if (img && !failed) {
+    // Fotos enlazadas desde la tienda de origen: se muestran sobre un fondo claro
+    // neutro para que las tomas con fondo blanco se vean uniformes en el sitio oscuro.
+    return (
+      <div className={cn("absolute inset-0 bg-[linear-gradient(160deg,#f4f4f6,#dcdce1)]", className)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={img.src}
+          alt={img.alt}
+          data-sizes={sizes}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
+          className={cn(
+            "h-full w-full object-contain mix-blend-multiply transition-transform duration-[1.2s] ease-premium group-hover:scale-105",
+            variant === "thumb" ? "p-1" : variant === "hero" ? "p-8 md:p-12" : "p-6"
+          )}
+        />
+      </div>
+    );
   }
   const Icon = product.category === "keyboard" ? Keyboard : Mouse;
   if (variant === "thumb") {
