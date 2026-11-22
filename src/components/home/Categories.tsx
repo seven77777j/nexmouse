@@ -39,11 +39,11 @@ export function Categories() {
             </p>
             <div className="relative -mx-8 my-4 flex-1 md:-mx-12">
               <Image
-                src="/images/products/phantom-2.webp"
+                src="/images/home/categoria-mouse.webp"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain mix-blend-lighten transition-transform duration-[1.4s] ease-premium group-hover:scale-105 [mask-image:radial-gradient(ellipse_at_center,#000_45%,transparent_72%)]"
+                className="object-contain mix-blend-lighten transition-transform duration-[1.4s] ease-premium group-hover:scale-105 [mask-image:radial-gradient(ellipse_at_center,#000_60%,transparent_88%)]"
               />
             </div>
             <p className="relative text-xs leading-relaxed text-white/40">{mouseBrands.slice(0, 12).join(" · ")} …</p>
