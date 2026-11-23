@@ -48,7 +48,7 @@ export function Faq() {
             <details data-reveal key={i.q} className="group py-2 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl py-5 text-left font-display text-lg tracking-tight text-white/85 transition-colors hover:text-white md:text-xl">
                 {i.q}
-                <Plus size={18} strokeWidth={1.5} className="shrink-0 text-white/40 transition-transform duration-500 ease-premium group-open:rotate-45 group-open:text-accent" />
+                <Plus size={18} strokeWidth={1.5} className="shrink-0 text-white/40 transition-transform duration-500 ease-premium group-open:rotate-45 group-open:text-accent-soft" />
               </summary>
               <p className="max-w-2xl pb-6 pr-10 text-sm leading-relaxed text-white/50 md:text-[15px]">{i.a}</p>
             </details>

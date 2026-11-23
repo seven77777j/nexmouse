@@ -72,7 +72,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                   </p>
                 </div>
                 <span className="text-sm text-white/60">{typeof p.price === "number" ? formatPrice(p.price) : "Consultar"}</span>
-                <ArrowRight size={16} className="text-white/30 transition group-hover:translate-x-1 group-hover:text-accent" />
+                <ArrowRight size={16} className="text-white/30 transition group-hover:translate-x-1 group-hover:text-accent-soft" />
               </Link>
             </li>
           ))}

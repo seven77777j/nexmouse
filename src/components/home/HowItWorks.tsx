@@ -39,7 +39,7 @@ export function HowItWorks() {
           {steps.map((s, i) => (
             <li data-reveal key={s.title} className="group relative bg-ink p-8 transition-colors duration-700 hover:bg-carbon md:p-10">
               <div className="flex items-center justify-between">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 text-white/80 transition-colors duration-500 group-hover:border-accent/50 group-hover:text-accent">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 text-white/80 transition-colors duration-500 group-hover:border-accent/50 group-hover:text-accent-soft">
                   <s.icon size={20} strokeWidth={1.5} />
                 </span>
                 <span className="font-mono text-[11px] tracking-[0.3em] text-white/25">0{i + 1}</span>
@@ -53,7 +53,7 @@ export function HowItWorks() {
         <ul className="mt-6 grid gap-6 md:grid-cols-3">
           {promises.map((p) => (
             <li data-reveal key={p.title} className="flex gap-4 rounded-[22px] border border-white/[0.05] bg-white/[0.015] p-6">
-              <p.icon size={18} strokeWidth={1.5} className="mt-0.5 shrink-0 text-accent" />
+              <p.icon size={18} strokeWidth={1.5} className="mt-0.5 shrink-0 text-accent-soft" />
               <div>
                 <p className="text-sm font-medium text-white">{p.title}</p>
                 <p className="mt-1 text-sm leading-relaxed text-white/45">{p.body}</p>

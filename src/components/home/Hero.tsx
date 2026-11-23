@@ -42,7 +42,7 @@ export function Hero() {
       {/* Luz cenital cinematográfica */}
       <div
         data-hero-glow
-        className="pointer-events-none absolute left-1/2 top-[38%] h-[70vh] w-[110vw] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(76,141,255,0.10),transparent_62%)]"
+        className="pointer-events-none absolute left-1/2 top-[38%] h-[70vh] w-[110vw] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(164,44,66,0.10),transparent_62%)]"
       />
 
       <div data-hero-copy className="relative z-10 mx-auto w-full max-w-7xl px-6 text-center md:px-10">
@@ -55,7 +55,7 @@ export function Hero() {
           </span>
           <span className="block overflow-hidden">
             <span data-hero-line className="block text-white/90">
-              EVERYTHING<span className="text-accent">.</span>
+              EVERYTHING<span className="text-accent-soft">.</span>
             </span>
           </span>
         </h1>

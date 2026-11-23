@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, Bodoni_Moda, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { CartProvider } from "@/store/cart";
@@ -9,7 +9,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { FloatingConsult } from "@/components/layout/FloatingConsult";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-const grotesk = Space_Grotesk({ variable: "--font-grotesk", subsets: ["latin"], display: "swap" });
+const bodoni = Bodoni_Moda({ variable: "--font-bodoni", subsets: ["latin"], display: "swap" });
 const mono = JetBrains_Mono({ variable: "--font-mono-face", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
@@ -41,12 +41,12 @@ const orgJsonLd = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080808",
+  themeColor: "#0b0a0a",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${grotesk.variable} ${mono.variable}`}>
+    <html lang="es" className={`${inter.variable} ${bodoni.variable} ${mono.variable}`}>
       <body className="min-h-screen bg-ink antialiased">
         <a href="#contenido" className="sr-only z-[100] rounded-full bg-white px-5 py-3 text-sm font-medium text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Saltar al contenido

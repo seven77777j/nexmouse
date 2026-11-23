@@ -59,7 +59,7 @@ export function ProductVisual({
     );
   }
   return (
-    <div className={cn("absolute inset-0 flex flex-col justify-between overflow-hidden bg-[radial-gradient(ellipse_80%_70%_at_70%_80%,rgba(76,141,255,0.16),transparent_60%),linear-gradient(160deg,#1b1b1f,#0d0d0f)] p-7", className)}>
+    <div className={cn("absolute inset-0 flex flex-col justify-between overflow-hidden bg-[radial-gradient(ellipse_80%_70%_at_70%_80%,rgba(164,44,66,0.16),transparent_60%),linear-gradient(160deg,#1c1718,#0d0b0b)] p-7", className)}>
       <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:32px_32px]" />
       <Icon
         strokeWidth={0.6}
@@ -79,7 +79,7 @@ export function ProductVisual({
         </span>
       )}
       <div className="relative">
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">{product.brand}</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-soft">{product.brand}</p>
         <p
           className={cn(
             "mt-2 font-display font-medium leading-[1.05] tracking-tight text-white",

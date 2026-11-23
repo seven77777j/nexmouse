@@ -95,13 +95,13 @@ export function useImageSequence(
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
     const cy = mobile ? h * 0.38 : h / 2;
-    ctx.fillStyle = "#080808";
+    ctx.fillStyle = "#0b0a0a";
     ctx.fillRect(0, 0, w, h);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(img, (w - dw) / 2, cy - dh / 2, dw, dh);
 
-    // Viñeta elíptica: funde los bordes del frame con el fondo (#080808)
+    // Viñeta elíptica: funde los bordes del frame con el fondo (#0b0a0a)
     // para que nunca se perciba el rectángulo de la imagen.
     ctx.save();
     ctx.translate(w / 2, cy);

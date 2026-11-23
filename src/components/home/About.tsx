@@ -22,7 +22,7 @@ export function About() {
         <dl className="grid gap-px overflow-hidden rounded-[28px] border border-white/[0.06] bg-white/[0.06] sm:grid-cols-2 lg:col-span-7">
           {values.map((v) => (
             <div data-reveal key={v.n} className="bg-ink p-8 md:p-10">
-              <span className="font-mono text-[10px] tracking-[0.3em] text-accent">{v.n}</span>
+              <span className="font-mono text-[10px] tracking-[0.3em] text-accent-soft">{v.n}</span>
               <dt className="mt-6 font-display text-2xl text-white">{v.title}</dt>
               <dd className="mt-3 text-sm leading-relaxed text-white/45">{v.body}</dd>
             </div>

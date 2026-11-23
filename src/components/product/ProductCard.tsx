@@ -27,7 +27,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           {product.rank && (
             <>
               <span className="text-white/25">/</span>
-              <span className={product.rank === 1 ? "text-accent" : undefined}>Top {product.rank}</span>
+              <span className={product.rank === 1 ? "text-accent-soft" : undefined}>Top {product.rank}</span>
             </>
           )}
         </div>

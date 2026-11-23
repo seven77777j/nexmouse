@@ -22,7 +22,7 @@ export default async function OgImage() {
           }}
         />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 80px", color: "white" }}>
-          <div style={{ fontSize: 22, letterSpacing: 8, color: "#4c8dff", textTransform: "uppercase" }}>Mouse y teclados gaming</div>
+          <div style={{ fontSize: 22, letterSpacing: 8, color: "#a42c42", textTransform: "uppercase" }}>Mouse y teclados gaming</div>
           <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: -3, marginTop: 18, lineHeight: 1 }}>
             {siteConfig.name.toUpperCase()}
           </div>

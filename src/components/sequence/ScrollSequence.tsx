@@ -85,7 +85,7 @@ export function ScrollSequence({ config, scrollLength = 3.2, heightClass = "h-[1
     <section ref={sectionRef} id={id} className="relative bg-ink" aria-label={label ?? "Experiencia interactiva del producto"}>
       <div ref={stageRef} className={cn("relative w-full overflow-hidden", heightClass)}>
         {/* Halo de luz detrás del producto */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_55%,rgba(76,141,255,0.07),transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_55%,rgba(164,44,66,0.07),transparent_70%)]" />
 
         <canvas
           ref={canvasRef}
@@ -113,7 +113,7 @@ export function ScrollSequence({ config, scrollLength = 3.2, heightClass = "h-[1
                 ch.align === "right" ? "md:left-auto md:right-10 md:text-right" : "md:left-10 md:right-auto"
               )}
             >
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent">{ch.eyebrow}</p>
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent-soft">{ch.eyebrow}</p>
               <h3 className="font-display text-[26px] font-medium leading-tight tracking-tight text-white md:text-4xl">{ch.title}</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/55 md:text-base">{ch.body}</p>
               {ch.stats && (

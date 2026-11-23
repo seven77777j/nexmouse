@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: Params) {
 
           <div className="lg:col-span-5 lg:pt-4">
             <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-white/45">
-              <Link href={`/products?category=${product.category}`} className="text-accent hover:underline">
+              <Link href={`/products?category=${product.category}`} className="text-accent-soft hover:underline">
                 {categoryLabel[product.category]}
               </Link>
               <span>·</span>
@@ -122,9 +122,9 @@ export default async function ProductPage({ params }: Params) {
             </div>
 
             <ul className="mt-10 grid gap-3 border-t border-white/[0.06] pt-8 text-sm text-white/55">
-              <li className="flex items-center gap-3"><MessageCircle size={16} strokeWidth={1.5} className="text-accent" />Respuesta directa de una persona, no de un bot</li>
-              <li className="flex items-center gap-3"><BadgeCheck size={16} strokeWidth={1.5} className="text-accent" />Precio, color y stock confirmados antes de pagar</li>
-              <li className="flex items-center gap-3"><Handshake size={16} strokeWidth={1.5} className="text-accent" />Pago y entrega coordinados contigo</li>
+              <li className="flex items-center gap-3"><MessageCircle size={16} strokeWidth={1.5} className="text-accent-soft" />Respuesta directa de una persona, no de un bot</li>
+              <li className="flex items-center gap-3"><BadgeCheck size={16} strokeWidth={1.5} className="text-accent-soft" />Precio, color y stock confirmados antes de pagar</li>
+              <li className="flex items-center gap-3"><Handshake size={16} strokeWidth={1.5} className="text-accent-soft" />Pago y entrega coordinados contigo</li>
             </ul>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default async function ProductPage({ params }: Params) {
       <section className="mx-auto max-w-7xl px-6 py-24 md:px-10">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent">Especificaciones</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent-soft">Especificaciones</p>
             <h2 className="mt-5 font-display text-4xl font-medium tracking-tight text-white">Características técnicas</h2>
             <p className="mt-5 text-sm leading-relaxed text-white/40">
               Te confirmamos la ficha técnica completa al consultar el producto.

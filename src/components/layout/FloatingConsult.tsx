@@ -23,7 +23,7 @@ export function FloatingConsult() {
       rel="noopener noreferrer"
       aria-label={`Consultar por ${consultChannel()}`}
       className={cn(
-        "group fixed bottom-5 right-5 z-40 flex h-14 items-center gap-2 rounded-full border border-white/10 bg-white pl-4 pr-5 text-sm font-medium text-ink shadow-[0_20px_60px_-15px_rgba(76,141,255,0.55)] transition-all duration-700 ease-premium hover:bg-accent hover:text-white md:bottom-8 md:right-8",
+        "group fixed bottom-5 right-5 z-40 flex h-14 items-center gap-2 rounded-full border border-white/10 bg-[#f2ede4] pl-4 pr-5 text-sm font-medium text-ink shadow-[0_20px_60px_-15px_rgba(164,44,66,0.55)] transition-all duration-700 ease-premium hover:bg-accent hover:text-white md:bottom-8 md:right-8",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       )}
     >

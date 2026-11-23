@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #080808;
-  --color-carbon: #0f0f10;
-  --color-graphite: #161618;
-  --color-steel: #232326;
-  --color-accent: #4c8dff;
-  --color-accent-soft: #8ab4ff;
+  --color-ink: #0b0a0a;
+  --color-carbon: #110f10;
+  --color-graphite: #181415;
+  --color-steel: #262022;
+  --color-accent: #a42c42;
+  --color-accent-soft: #cf6f80;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bodoni), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
@@ -20,19 +20,19 @@
 }
 
 html {
-  background: #080808;
+  background: #0b0a0a;
 }
 
 body {
-  background: #080808;
-  color: #f2f2f3;
+  background: #0b0a0a;
+  color: #f2ede4;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(76, 141, 255, 0.35);
+  background: rgba(164,44,66, 0.35);
   color: #fff;
 }
 
@@ -72,7 +72,7 @@ body {
 
 /* Foco visible y consistente para teclado */
 :where(a, button, summary, input, select, textarea):focus-visible {
-  outline: 2px solid rgba(76, 141, 255, 0.8);
+  outline: 2px solid rgba(164,44,66, 0.8);
   outline-offset: 3px;
   border-radius: 12px;
 }

@@ -24,10 +24,10 @@ export function Categories() {
           <Link
             data-reveal
             href="/products?category=mouse"
-            className="group relative flex min-h-[600px] flex-col overflow-hidden rounded-[32px] border border-white/[0.06] bg-[#0b0c10] p-8 md:p-12"
+            className="group relative flex min-h-[600px] flex-col overflow-hidden rounded-[32px] border border-white/[0.06] bg-[#0f0c0d] p-8 md:p-12"
           >
-            <div className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:linear-gradient(rgba(76,141,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(76,141,255,0.08)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_70%_60%,#000,transparent_70%)]" />
-            <div className="relative flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+            <div className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:linear-gradient(rgba(164,44,66,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(164,44,66,0.08)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_70%_60%,#000,transparent_70%)]" />
+            <div className="relative flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-accent-soft">
               <span>01 / Mouse</span>
               <span className="text-white/30">{mice} modelos</span>
             </div>
@@ -56,7 +56,7 @@ export function Categories() {
           <Link
             data-reveal
             href="/products?category=keyboard"
-            className="group relative flex min-h-[600px] flex-col overflow-hidden rounded-[32px] border border-white/[0.06] bg-gradient-to-b from-[#17171a] to-[#101012] p-8 md:p-12"
+            className="group relative flex min-h-[600px] flex-col overflow-hidden rounded-[32px] border border-white/[0.06] bg-gradient-to-b from-[#181415] to-[#0f0d0e] p-8 md:p-12"
           >
             <div className="relative flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
               <span>02 / Teclados</span>
