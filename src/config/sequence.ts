@@ -6,13 +6,13 @@ import type { ImageSequenceConfig } from "@/types/product";
  * manteniendo la nomenclatura frame_000.webp … y ajusta frameCount / aspect.
  */
 export const heroSequence: Omit<ImageSequenceConfig, "chapters"> = {
-  basePath: "/images/mouse-sequence",
-  frameCount: 121,
+  basePath: "/images/sequences/ying-forged",
+  frameCount: 120,
   prefix: "frame_",
   pad: 3,
   extension: "webp",
-  aspect: 1440 / 900,
-  isPlaceholder: true,
+  aspect: 960 / 600,
+  isPlaceholder: false,
 };
 
 export function frameSrc(cfg: Pick<ImageSequenceConfig, "basePath" | "prefix" | "pad" | "extension">, i: number) {
@@ -53,7 +53,7 @@ export function homeChapters(stats: { models: number; brands: number }): NonNull
     },
     {
       from: 91,
-      to: 120,
+      to: 119,
       eyebrow: "04 — Tu setup",
       title: "Precision is everything.",
       body: "Lo mejor para tu setup, en un solo lugar.",
