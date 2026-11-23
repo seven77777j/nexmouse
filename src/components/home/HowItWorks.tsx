@@ -1,3 +1,4 @@
+import { AmbientGlow } from "@/components/ui/AmbientGlow";
 import { MessageCircle, MousePointerClick, PackageCheck, ShieldCheck, Sparkles, Trophy } from "lucide-react";
 import { Reveal } from "@/components/home/Reveal";
 import { SectionHeading } from "@/components/home/SectionHeading";
@@ -29,7 +30,8 @@ export function HowItWorks() {
     { icon: Sparkles, title: "Asesoría real", body: "Te ayudamos a elegir según tu mano, agarre y tipo de juego." },
   ];
   return (
-    <section id="como-comprar" className="relative bg-ink py-28 md:py-40">
+    <section id="como-comprar" className="relative overflow-hidden bg-ink py-28 md:py-40">
+      <AmbientGlow intensity={0.55} />
       <Reveal className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHeading eyebrow="Cómo comprar" title="Tres pasos. Cero complicaciones.">
           Comprar en la tienda es tan simple como escribirnos. Así funciona:

@@ -1,3 +1,4 @@
+import { AmbientGlow } from "@/components/ui/AmbientGlow";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -13,7 +14,8 @@ export function Categories() {
   const keyboardBrands = getBrands("keyboard");
 
   return (
-    <section id="categorias" className="relative bg-ink py-28 md:py-40">
+    <section id="categorias" className="relative overflow-hidden bg-ink py-28 md:py-40">
+      <AmbientGlow intensity={0.5} />
       <Reveal className="mx-auto max-w-7xl px-6 md:px-10">
         <SectionHeading eyebrow="Categorías" title={<>Todo para<br />tu setup.</>}>
           Mouse y teclados gaming de las marcas que marcan el ritmo. Elige por dónde empezar.

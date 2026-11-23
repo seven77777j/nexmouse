@@ -1,3 +1,4 @@
+import { AmbientGlow } from "@/components/ui/AmbientGlow";
 import { Plus } from "lucide-react";
 import { Reveal } from "@/components/home/Reveal";
 import { SectionHeading } from "@/components/home/SectionHeading";
@@ -38,7 +39,8 @@ export function Faq() {
     mainEntity: items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })),
   };
   return (
-    <section id="preguntas" className="relative bg-carbon py-28 md:py-40">
+    <section id="preguntas" className="relative overflow-hidden bg-carbon py-28 md:py-40">
+      <AmbientGlow intensity={0.55} />
       <Reveal className="mx-auto grid max-w-7xl gap-14 px-6 md:px-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <SectionHeading eyebrow="Preguntas frecuentes" title="Todo claro antes de comprar." />

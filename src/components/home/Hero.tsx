@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ButtonLink } from "@/components/ui/Button";
+import { AmbientGlow } from "@/components/ui/AmbientGlow";
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -40,10 +41,9 @@ export function Hero() {
   return (
     <section ref={root} className="grain relative flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-24 md:pt-28">
       {/* Luz cenital cinematográfica */}
-      <div
-        data-hero-glow
-        className="pointer-events-none absolute left-1/2 top-[38%] h-[70vh] w-[110vw] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(164,44,66,0.10),transparent_62%)]"
-      />
+      <div data-hero-glow className="absolute inset-0">
+        <AmbientGlow />
+      </div>
 
       <div data-hero-copy className="relative z-10 mx-auto w-full max-w-7xl px-6 text-center md:px-10">
         <p data-hero-fade className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 md:text-[11px] md:tracking-[0.4em]">
@@ -80,7 +80,7 @@ export function Hero() {
             fill
             priority
             sizes="(min-width: 1280px) 1152px, 100vw"
-            className="object-contain"
+            className="object-contain mix-blend-lighten"
           />
         </div>
       </div>
