@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0b0a0a;
-  --color-carbon: #110f10;
-  --color-graphite: #181415;
-  --color-steel: #262022;
+  --color-ink: #1d1d20;
+  --color-carbon: #232326;
+  --color-graphite: #2a2a2e;
+  --color-steel: #37373c;
   --color-accent: #a42c42;
   --color-accent-soft: #cf6f80;
 
@@ -20,11 +20,11 @@
 }
 
 html {
-  background: #0b0a0a;
+  background: #1d1d20;
 }
 
 body {
-  background: #0b0a0a;
+  background: #1d1d20;
   color: #f2ede4;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;

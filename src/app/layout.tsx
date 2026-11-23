@@ -41,7 +41,7 @@ const orgJsonLd = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0a0a",
+  themeColor: "#1d1d20",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

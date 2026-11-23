@@ -83,14 +83,14 @@ export function ScrollSequence({ config, scrollLength = 3.2, heightClass = "h-[1
 
   return (
     <section ref={sectionRef} id={id} className="relative bg-ink" aria-label={label ?? "Experiencia interactiva del producto"}>
-      <div ref={stageRef} className={cn("relative w-full overflow-hidden", heightClass)}>
+      <div ref={stageRef} className={cn("relative w-full overflow-hidden bg-ink", heightClass)}>
         {/* Halo de luz detrás del producto */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_55%,rgba(164,44,66,0.07),transparent_70%)]" />
 
         <canvas
           ref={canvasRef}
           className={cn(
-            "absolute inset-0 h-full w-full transition-opacity duration-700 sequence-mask",
+            "absolute inset-0 h-full w-full mix-blend-lighten transition-opacity duration-700 sequence-mask",
             ready ? "opacity-100" : "opacity-0"
           )}
           role="img"

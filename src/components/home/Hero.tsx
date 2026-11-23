@@ -72,7 +72,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div data-hero-product className="relative z-0 mx-auto -mt-[12vw] w-full max-w-6xl flex-1 md:-mt-[17vw] xl:-mt-56">
+      <div data-hero-product className="relative z-0 mix-blend-lighten mx-auto -mt-[12vw] w-full max-w-6xl flex-1 md:-mt-[17vw] xl:-mt-56">
         <div className="relative aspect-[16/10] w-full sequence-mask">
           <Image
             src="/images/home/portada-mouse-v2.webp"
@@ -80,7 +80,7 @@ export function Hero() {
             fill
             priority
             sizes="(min-width: 1280px) 1152px, 100vw"
-            className="object-contain mix-blend-lighten"
+            className="object-contain"
           />
         </div>
       </div>

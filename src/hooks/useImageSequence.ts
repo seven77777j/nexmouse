@@ -95,20 +95,20 @@ export function useImageSequence(
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
     const cy = mobile ? h * 0.38 : h / 2;
-    ctx.fillStyle = "#0b0a0a";
+    ctx.fillStyle = "#1d1d20";
     ctx.fillRect(0, 0, w, h);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(img, (w - dw) / 2, cy - dh / 2, dw, dh);
 
-    // Viñeta elíptica: funde los bordes del frame con el fondo (#0b0a0a)
+    // Viñeta elíptica: funde los bordes del frame con el fondo (#1d1d20)
     // para que nunca se perciba el rectángulo de la imagen.
     ctx.save();
     ctx.translate(w / 2, cy);
     ctx.scale(1, dh / dw);
     const g = ctx.createRadialGradient(0, 0, dw * 0.3, 0, 0, dw * 0.5);
-    g.addColorStop(0, "rgba(8,8,8,0)");
-    g.addColorStop(1, "rgba(8,8,8,1)");
+    g.addColorStop(0, "rgba(29,29,32,0)");
+    g.addColorStop(1, "rgba(29,29,32,1)");
     ctx.fillStyle = g;
     ctx.fillRect(-w, -h * (dw / dh), w * 2, h * 2 * (dw / dh));
     ctx.restore();

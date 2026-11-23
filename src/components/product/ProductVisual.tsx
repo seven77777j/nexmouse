@@ -59,7 +59,7 @@ export function ProductVisual({
     );
   }
   return (
-    <div className={cn("absolute inset-0 flex flex-col justify-between overflow-hidden bg-[radial-gradient(ellipse_80%_70%_at_70%_80%,rgba(164,44,66,0.16),transparent_60%),linear-gradient(160deg,#1c1718,#0d0b0b)] p-7", className)}>
+    <div className={cn("absolute inset-0 flex flex-col justify-between overflow-hidden bg-[radial-gradient(ellipse_80%_70%_at_70%_80%,rgba(164,44,66,0.16),transparent_60%),linear-gradient(160deg,#2c2c30,#1c1c1f)] p-7", className)}>
       <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:32px_32px]" />
       <Icon
         strokeWidth={0.6}
